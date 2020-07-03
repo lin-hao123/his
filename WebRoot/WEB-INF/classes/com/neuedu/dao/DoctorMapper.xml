@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.neuedu.dao.DoctorMapper">
+
+	<resultMap id="doctorMap" type="com.neuedu.entity.Doctor">
+		<result property="id" column="oid"/> 
+		<result property="name" column="oname"/> 
+		<result property="fee" column="fee"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/> 
+		<association property="department" javaType="com.neuedu.entity.Department"> 
+			<result property="id" column="eid"></result> 
+			<result property="name" column="ename"></result> 
+		</association> 
+	</resultMap>
+	<select id="queryDoctorByUsername" resultMap="doctorMap"> 
+		SELECT o.id AS oid,  o.name AS oname,  e.id AS eid,  e.name AS ename, fee, username, password
+		FROM doctor o, department e WHERE e.id = o.deptid AND username = #{username} 
+	 </select>
+	 <select id="queryAllCount" resultType="_int"> 
+		select count(*) from doctor 
+	 </select>
+	 
+	<select id="queryAllByPage" parameterType="map" resultMap="doctorMap">
+		SELECT o.id AS oid, o.name AS oname, e.id AS eid, e.name AS ename, fee, username, password 
+		FROM doctor o, department e  
+		WHERE e.id = o.deptid 
+		<if test="startIndex != null and pageSize != null"> 
+			limit #{startIndex}, #{pageSize} 
+		</if>
+	  </select>
+	<insert id="add" parameterType="Doctor"> 
+		insert into doctor (name,deptid,fee,username,password) 
+		values (#{name},#{department.id},#{fee},#{username},#{password}); 
+	</insert>
+	<select id="queryByPage" parameterType="map" resultMap="doctorMap"> 
+		SELECT o.id AS oid,  o.name AS oname, e.id AS eid,  e.name AS ename, fee,  username,  password 
+		FROM doctor o, department e 
+		WHERE e.id = o.deptid 
+		and o.deptid != 1 
+		and o.deptid != 2 
+		<if test="startIndex != null and pageSize != null">
+		limit #{startIndex}, #{pageSize} 
+		</if> 
+	</select>
+
+</mapper>

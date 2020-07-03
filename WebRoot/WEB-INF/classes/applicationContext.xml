@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <beans xmlns="http://www.springframework.org/schema/beans" 
+ 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	 xmlns:context="http://www.springframework.org/schema/context" 
+	 xmlns:tx="http://www.springframework.org/schema/tx" 
+	 xmlns:aop="http://www.springframework.org/schema/aop" 
+	 xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	 xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		 https://www.springframework.org/schema/beans/spring-beans.xsd 
+		 http://www.springframework.org/schema/context 
+		 https://www.springframework.org/schema/context/spring-context.xsd 
+		 http://www.springframework.org/schema/tx 
+		 http://www.springframework.org/schema/tx/spring-tx.xsd 
+		 http://www.springframework.org/schema/aop 
+		 https://www.springframework.org/schema/aop/spring-aop.xsd 
+		 http://www.springframework.org/schema/mvc 
+		 https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		 
+		<!-- 关联数据库配置文件 -->
+	<context:property-placeholder location="classpath:database.properties"/>
+
+	<!--连接池-->
+	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		 <property name="driverClass" value="${jdbc.driver}"/> 
+		 <property name="jdbcUrl" value="${jdbc.url}"/> 
+		 <property name="user" value="${jdbc.username}"/> 
+		 <property name="password" value="${jdbc.password}"/> 
+		 <!--c3p0连接池私有属性--> 
+		 <property name="maxPoolSize" value="30"/> 
+		 <property name="minPoolSize" value="10"/> 
+		 <!--关闭连接后不自动提交--> 
+		 <property name="autoCommitOnClose" value="false"/> 
+		 <!--获取连接池超时时间--> <property name="checkoutTimeout" value="10000"/> 
+		 <!--当获取连接失败时的重试次数--> 
+		 <property name="acquireRetryAttempts" value="2"/> 
+	</bean>
+	<!--sqlSessionFactory-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+		<property name="dataSource" ref="dataSource"/> 
+		<!--绑定mybatis配置文件--> 
+		<property name="configLocation" value="classpath:mybatis-config.xml"/> 
+	</bean>
+	<!--配置dao接口扫描包，动态实现dao接口可以注入到spring容器中--> 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+		<!--注入sqlSessionFactory--> 
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/> 
+		<!--要扫描的dao包--> 
+		<property name="basePackage" value="com.neuedu.dao"/> 
+	</bean>
+	<!--使service包下面的注解生效并由IOC容器统一管理-->
+	<context:component-scan base-package="com.neuedu.service"/>
+
+	 <!-- 支持MVC注解驱动 
+	 在spring中一般采用@RequestMapping注解来完成映射关系 
+	 要想使@RequestMapping注解生效必须向上下文中注入DefaultAnnotationHandlerMapping和 AnnotationMethodHandlerAdapter实例 
+	 这两个实例分别在类级别和方法级别处理 
+	 而annotation-driven自动帮助我们完成上述两个实例的注入
+	Json乱码问题配置
+	--> 
+	<mvc:annotation-driven > 
+		<mvc:message-converters register-defaults="true"> 
+		<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+			<constructor-arg value="UTF-8"/> 
+		</bean> 
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
+				<property name="objectMapper"> 
+					<bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"> 
+						<property name="failOnEmptyBeans" value="false"/> 
+					</bean>
+				</property> 
+			</bean> 
+		</mvc:message-converters> 
+	</mvc:annotation-driven>
+ 	<!-- SpringMVC不处理静态资源(如.css .js .html .mp3 .mp4等)  --> 
+ 	<mvc:default-servlet-handler />
+	<!-- 自动扫描包，让指定包下面的注解生效并由IOC容器统一管理 --> 
+	<context:component-scan base-package="com.neuedu.controller" />
+ 	<!--视图解析器--> 
+ 	<bean id="internalResourceViewResolver" 
+ 	class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+	 	<!--前缀--> 
+	 	<property name="prefix" value="/jsp/" /> 
+	 	<!--后缀--> 
+	 	<property name="suffix" value=".jsp" /> 
+ 	</bean>
+	<!-- 拦截器配置 --> 
+	<mvc:interceptors> 
+		<mvc:interceptor> 
+			<!-- 包括这个请求下面的所有请求 --> 
+			<mvc:mapping path="/**"/> 
+			<bean class="com.neuedu.tool.LoginInterceptorTool"></bean> 
+		</mvc:interceptor> 
+	</mvc:interceptors>
+ 	
+ 	
+ 	
+ </beans>

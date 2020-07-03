@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.neuedu.dao.DepartmentMapper">
+	<select id="queryAllCount" resultType="_int"> 
+		select count(*) from department 
+	</select>
+	<select id="queryAllByPage" parameterType="map" resultType="Department"> 
+		select * from department 
+		<if test="startIndex != null and pageSize != null"> 
+			limit #{startIndex}, #{pageSize} 
+		</if>
+	</select>
+		<insert id="add" parameterType="Department"> 
+		insert into department (name) values (#{name}); 
+	</insert>
+			
+</mapper>
