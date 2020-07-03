@@ -2,15 +2,22 @@
 <!DOCTYPE configuration
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
-	<configuration> 
+<configuration> 
 	
 	<settings> <setting name="logImpl" value="STDOUT_LOGGING"/> </settings>
 	<typeAliases> 
 		<typeAlias alias="Department" type="com.neuedu.entity.Department"/> 
 		<typeAlias alias="Doctor" type="com.neuedu.entity.Doctor"/> 
+		<typeAlias alias="Medicine" type="com.neuedu.entity.Medicine"/>
+		<typeAlias alias="Prescription" type="com.neuedu.entity.Prescription"/>
+		<typeAlias alias="Register" type="com.neuedu.entity.Register"/>
 	</typeAliases>
-		<mappers> <mapper class="com.neuedu.dao.DepartmentMapper"/> 
+	<mappers> 
+		<mapper class="com.neuedu.dao.DepartmentMapper"/> 
 		<mapper class="com.neuedu.dao.DoctorMapper"/>
-	 </mappers>
+		<mapper class="com.neuedu.dao.MedicineMapper"/>
+		
+		
+	</mappers>
 
 </configuration>

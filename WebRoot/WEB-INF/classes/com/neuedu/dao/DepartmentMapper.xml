@@ -11,7 +11,7 @@
 			limit #{startIndex}, #{pageSize} 
 		</if>
 	</select>
-		<insert id="add" parameterType="Department"> 
+	<insert id="add" parameterType="Department"> 
 		insert into department (name) values (#{name}); 
 	</insert>
 			
