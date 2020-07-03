@@ -5,31 +5,33 @@ import java.io.Serializable;
 public class Medicine implements Serializable{
 	
 	private Integer id;
-	private String 	mname;
-	private Integer	mfee;
-	private	Integer mnum;
+	private String 	name;
+	private Integer	fee;
+	private	Integer count;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getMname() {
-		return mname;
+
+	public String getName() {
+		return name;
 	}
-	public void setMname(String mname) {
-		this.mname = mname;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Integer getMfee() {
-		return mfee;
+	public Integer getFee() {
+		return fee;
 	}
-	public void setMfee(Integer mfee) {
-		this.mfee = mfee;
+	public void setFee(Integer fee) {
+		this.fee = fee;
 	}
-	public Integer getMnum() {
-		return mnum;
+	public Integer getCount() {
+		return count;
 	}
-	public void setMnum(Integer mnum) {
-		this.mnum = mnum;
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 }
+

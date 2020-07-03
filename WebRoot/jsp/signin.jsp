@@ -40,19 +40,26 @@
 		// 验证用户名	JSON讲解[{id:"1",name:"综管部"},{id:"2",name:"药品部"}]
 		function checkUsername(){
 			var un = $("#username").val();
-    		if(isEmpty(un)){
+    		if(isEmpty(un))
+    		{
     			showMsg("用户名不能为空");
-    		}else{
+    		}
+    		else
+    		{
     			hideMsg();
     			$.post({
         			url:"${pageContext.request.contextPath}/doctor/checkUsername",
         			data:{"username":un},
         			success:function(data){
-        				if(data=="true"){
+        				if(data=="true")
+        				{
         					// 用户名存在
-        				}else if(data=="false"){
+        				}
+        				else if(data=="false")
+        				{
             				showMsg("用户名不存在");
-        				}else{
+        				}else
+        				{
         					showMsg("系统繁忙");
         				}
         			}

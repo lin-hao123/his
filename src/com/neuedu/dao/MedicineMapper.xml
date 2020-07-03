@@ -14,6 +14,6 @@
 		</if>
 	</select>
 	<insert id="add" parameterType="Medicine"> 
-		insert into medicine (name) values (#{mname}); 
+		insert into medicine (name) values (#{name}); 
 	</insert>
 </mapper>

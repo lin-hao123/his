@@ -39,19 +39,27 @@ public class DoctorController {
 	public String login(String username, String password, Model model, HttpSession session){  
 		if(username!=null&&username.length()>0  &&password!=null  &&password.length()>0) {
 			Doctor doctor = doctorService.queryDoctorByUsername(username);
-			if(doctor==null||!password.equals(doctor.getPassword())){
+			if(doctor==null||!password.equals(doctor.getPassword()))
+			{
 			model.addAttribute("msg","1");
-			}else{
+			}
+			else
+			{
 			session.setAttribute("loginDoctor", doctor);
-			if(doctor.getDepartment().getId()==1) {   
+				if(doctor.getDepartment().getId()==1) 
+				{   
 				//综管科医生登录
 				return "redirect:/department/list";
-			}else if(doctor.getDepartment().getId()==2) {
+				}
+				else if(doctor.getDepartment().getId()==2) 
+				{
 				//药房科医生登录
 				return "redirect:/medicine/list";
-			}else {
+				}
+				else 
+				{
 				return "redirect:/register/list3";
-			}
+				}
 			}
 		}else {
 			//用户名或密码无效
