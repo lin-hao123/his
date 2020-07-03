@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.neuedu.entity.Department;
 import com.neuedu.entity.Medicine;
 import com.neuedu.service.MedicineService;
 
@@ -48,6 +49,11 @@ public class MedicineController {
 		List<Medicine> list = medicineService.queryAllByPage(mapParameter);  
 		model.addAttribute("list",list);
 		return "medicine";
+	}
+	@RequestMapping("/add")
+	public String add(Medicine parameter){
+		medicineService.add(parameter);
+		return "redirect:/medicine/list";
 	}
 
 }

@@ -57,7 +57,8 @@ public class DepartmentController {
 		return "redirect:/department/list";
 	}
 	@ResponseBody
-	@RequestMapping("/st")  public void st(){
+	@RequestMapping("/st")  
+	public void st(){
 		try {  departmentService.showTransactional();
 		}
 		catch (Exception e) {
