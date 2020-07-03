@@ -13,4 +13,4 @@
 		<mapper class="com.neuedu.dao.DoctorMapper"/>
 	 </mappers>
 
-</configuration>sss
+</configuration>
