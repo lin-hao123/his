@@ -14,7 +14,7 @@
 			<result property="fee" column="efee"></result> 
 		</association> 
 	</resultMap>
-	<select id="queryDoctorByUsername" resultMap="doctorMap"> 
+	<select id="queryDoctorByNumber" resultMap="registerMap"> 
 		SELECT o.id AS oid,  o.number AS oname,  e.id AS eid,  e.name AS ename, e.fee AS efee, date,ispaid
 		FROM register o, doctor e WHERE e.id = o.docid 
 	 </select>
@@ -22,7 +22,7 @@
 		select count(*) from register 
 	 </select>
 	 
-	<select id="queryAllByPage" parameterType="map" resultMap="doctorMap">
+	<select id="queryAllByPage" parameterType="map" resultMap="registerMap">
 		SELECT o.id AS oid, o.number AS onumber, e.id AS eid, e.name AS ename, e.fee AS efee, date,ispaid 
 		FROM register o,doctor e  
 		WHERE e.id = o.docid 
