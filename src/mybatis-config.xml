@@ -16,7 +16,7 @@
 		<mapper class="com.neuedu.dao.DepartmentMapper"/> 
 		<mapper class="com.neuedu.dao.DoctorMapper"/>
 		<mapper class="com.neuedu.dao.MedicineMapper"/>
-		
+		<mapper class="com.neuedu.dao.RegisterMapper"/>
 		
 	</mappers>
 
