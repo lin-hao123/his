@@ -14,7 +14,7 @@
 			<result property="fee" column="efee"></result> 
 		</association> 
 	</resultMap>
-	<select id="queryDoctorByNumber" resultMap="registerMap"> 
+	<select id="queryRegisterByNumber" resultMap="registerMap"> 
 		SELECT o.id AS oid,  o.number AS oname,  e.id AS eid,  e.name AS ename, e.fee AS efee, date,ispaid
 		FROM register o, doctor e WHERE e.id = o.docid 
 	 </select>
@@ -32,6 +32,6 @@
 	  </select>
 	<insert id="add" parameterType="Register"> 
 		insert into register (number,date,docid,docname,docfee,ispaid) 
-		values (#{number},#{date},#{doctor.id},#{doctor.name},#{doctor.fee},#{ispaid}); 
+		values (#{number},CURDATE(),#{doctor.id},#{doctor.name},#{doctor.fee},#{ispaid}); 
 	</insert>
 </mapper>
