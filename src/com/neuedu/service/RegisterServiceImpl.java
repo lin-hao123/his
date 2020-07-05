@@ -16,6 +16,7 @@ public class RegisterServiceImpl implements RegisterService {
 	@Autowired
 	@Qualifier("registerMapper")  
 	private RegisterMapper mapper;
+	
 	@Override
 	public Register queryRegisterByNumber(int parameter) {
 		// TODO Auto-generated method stub

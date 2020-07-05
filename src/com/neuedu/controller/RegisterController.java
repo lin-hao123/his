@@ -1,6 +1,6 @@
 package com.neuedu.controller;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.neuedu.entity.Department;
+
 import com.neuedu.entity.Doctor;
-import com.neuedu.entity.Medicine;
 import com.neuedu.entity.Register;
 import com.neuedu.service.DoctorService;
 import com.neuedu.service.RegisterService;

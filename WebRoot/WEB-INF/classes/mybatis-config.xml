@@ -17,6 +17,7 @@
 		<mapper class="com.neuedu.dao.DoctorMapper"/>
 		<mapper class="com.neuedu.dao.MedicineMapper"/>
 		<mapper class="com.neuedu.dao.RegisterMapper"/>
+		<mapper class="com.neuedu.dao.PrescriptionMapper"/>
 		
 	</mappers>
 
