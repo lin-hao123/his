@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.neuedu.dao.PrescriptionMapper">
+
 	<resultMap id="prescriptionMap" type="com.neuedu.entity.Prescription">
 		<result property="id" column="pid"/> 
 		<result property="count" column="pcount"/> 
@@ -31,7 +32,7 @@
 	
 	<insert id="add" parameterType="Prescription"> 
 		insert into prescription (rid,mid,mname,mfee,count,isdistributed) 
-		values ({prescription.id},
+		values (#{register.id},
 		#{medicine.id},
 		(select name from medicine where medicine.id=#{medicine.id}),
 		(select fee from medicine where medicine.id=#{medicine.id}),
