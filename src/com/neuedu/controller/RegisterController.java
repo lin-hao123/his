@@ -32,6 +32,31 @@ public class RegisterController {
 	
 	@RequestMapping("/list")
 	public String list(String strPageIndex, String strPageSize, Model model){
+		
+		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
+		
+		int pageSize = PageTool.getPageSize(strPageSize, model);
+		
+		int dataCount = registerService.queryAllCount();  
+		
+		PageTool.setPageCount(pageSize, dataCount, model);
+		
+		Map<String, Object> mapParameter = new HashMap<String, Object>(); 
+		
+		List<Doctor> listDoct = doctorService.queryByPage(mapParameter);  
+		
+		model.addAttribute("listDoct",listDoct);
+		
+		PageTool.setStartIndex(pageSize, pageIndex, mapParameter);
+		
+		List<Register> list = registerService.queryAllByPage(mapParameter); 
+		
+		model.addAttribute("list",list);
+		
+		return "register";
+	}
+	@RequestMapping("/list2")
+	public String list2(String strPageIndex, String strPageSize, Model model){
 		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
 		
 		int pageSize = PageTool.getPageSize(strPageSize, model);
@@ -52,7 +77,55 @@ public class RegisterController {
 		
 		model.addAttribute("listDoct",listDoct);
 		
-		return "register";
+		return "register2";
+	}
+	@RequestMapping("/list3")
+	public String list3(String strPageIndex, String strPageSize, Model model){
+		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
+		
+		int pageSize = PageTool.getPageSize(strPageSize, model);
+		
+		int dataCount = registerService.queryAllCount();  
+		
+		PageTool.setPageCount(pageSize, dataCount, model);
+		
+		Map<String, Object> mapParameter = new HashMap<String, Object>(); 
+		
+		List<Register> list = registerService.queryAllByPage(mapParameter);  
+		
+		model.addAttribute("list",list);
+		
+		PageTool.setStartIndex(pageSize, pageIndex, mapParameter);
+		
+		List<Doctor> listDoct = doctorService.queryByPage(mapParameter); 
+		
+		model.addAttribute("listDoct",listDoct);
+		
+		return "register3";
+	}
+	@RequestMapping("/list4")
+	public String list4(String strPageIndex, String strPageSize, Model model){
+		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
+		
+		int pageSize = PageTool.getPageSize(strPageSize, model);
+		
+		int dataCount = registerService.queryAllCount();  
+		
+		PageTool.setPageCount(pageSize, dataCount, model);
+		
+		Map<String, Object> mapParameter = new HashMap<String, Object>(); 
+		
+		List<Register> list = registerService.queryAllByPage(mapParameter);  
+		
+		model.addAttribute("list",list);
+		
+		PageTool.setStartIndex(pageSize, pageIndex, mapParameter);
+		
+		List<Doctor> listDoct = doctorService.queryByPage(mapParameter); 
+		
+		model.addAttribute("listDoct",listDoct);
+		
+		return "register4";
 	}
 	@RequestMapping("/add")
 	public String add(Register parameter){
