@@ -11,9 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import com.neuedu.entity.Doctor;
+import com.neuedu.entity.Medicine;
 import com.neuedu.entity.Prescription;
+import com.neuedu.entity.Register;
+import com.neuedu.service.DoctorService;
+import com.neuedu.service.MedicineService;
 import com.neuedu.service.PrescriptionService;
+import com.neuedu.service.RegisterService;
 import com.neuedu.tool.PageTool;
 
 @Controller
@@ -24,33 +29,43 @@ public class PrescriptionController
 	@Qualifier("prescriptionServiceImpl")
 	private PrescriptionService prescriptionService;
 	
+	@Autowired
+	@Qualifier("medicineServiceImpl")
+	private MedicineService medicineService;
 	
-	@RequestMapping("/list/1")
+	@Autowired
+	@Qualifier("registerServiceImpl")
+	private RegisterService registerService;
+	
+	@RequestMapping("/list/{prescription.id}")
 	public String list(String strPageIndex, String strPageSize, Model model){
 		
-		int pageIndex = 1;
-		if(strPageIndex != null && strPageIndex.matches("\\d+")) { pageIndex = Integer.parseInt(strPageIndex);}
-		model.addAttribute("pageIndex", pageIndex);
-		int pageSize = 2;
-		if(strPageSize != null && strPageIndex.matches("\\d+")) {pageSize = Integer.parseInt(strPageSize);}
+		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
 		
-		model.addAttribute("pageSize", pageSize);
-		int dataCount = prescriptionService.queryAllCount();
-		int pageCount;
-		if(dataCount % pageSize == 0) {pageCount = dataCount / pageSize;}
-		else {pageCount = (dataCount / pageSize)+ 1;}
+		int pageSize = PageTool.getPageSize(strPageSize, model);
 		
-		model.addAttribute("pageCount", pageCount);
-		List<String> listStringPage = new ArrayList<String>();
-		for (int i = 1; i <= pageCount; i++) {listStringPage.add(String.valueOf(i));}
+		int dataCount = prescriptionService.queryAllCount();  
 		
-		model.addAttribute("listStringPage", listStringPage);
-		Map<String, Object> mapParameter = new HashMap<String, Object>();
-		int startIndex = (pageIndex - 1) * pageSize;
-		mapParameter.put("startIndex", startIndex);  
-		mapParameter.put("pageSize", pageSize);
-		List<Prescription> list = prescriptionService.queryAllByPage(mapParameter);  
+		PageTool.setPageCount(pageSize, dataCount, model);
+		
+		Map<String, Object> mapParameter = new HashMap<String, Object>(); 
+		
+		List<Medicine> listMedi = medicineService.queryAllByPage(mapParameter);  
+		
+		model.addAttribute("listMedi",listMedi);
+		
+		PageTool.setStartIndex(pageSize, pageIndex, mapParameter);
+		
+		List<Prescription> list = prescriptionService.queryAllByPage(mapParameter); 
+		
 		model.addAttribute("list",list);
+		
+		return "prescription";
+		
+	}
+	@RequestMapping("/add")
+	public String add(Prescription parameter){
+		prescriptionService.add(parameter);
 		return "prescription";
 	}
 

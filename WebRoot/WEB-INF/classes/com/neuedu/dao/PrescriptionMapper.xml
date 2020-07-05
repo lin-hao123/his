@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.neuedu.dao.PrescriptionMapper">
-
 	<resultMap id="prescriptionMap" type="com.neuedu.entity.Prescription">
 		<result property="id" column="pid"/> 
 		<result property="count" column="pcount"/> 
@@ -21,10 +20,21 @@
 		select count(*) from prescription
 	 </select>
 	
-	<select id="queryAllByPage" parameterType="map" resultType="Prescription"> 
-		select * from prescription
+	<select id="queryAllByPage" parameterType="map" resultMap="prescriptionMap"> 
+		SELECT p.id AS pid, r.id AS rid, m.id AS mid, m.name AS mname, m.fee AS mfee,p.count AS pcount,isdistributed AS pisdistributed
+		FROM prescription p,register r,medicine m  
+		WHERE p.mid=m.id 
 		<if test="startIndex != null and pageSize != null"> 
 			limit #{startIndex}, #{pageSize} 
 		</if>
 	</select>
+	
+	<insert id="add" parameterType="Prescription"> 
+		insert into prescription (rid,mid,mname,mfee,count,isdistributed) 
+		values ({prescription.id},
+		#{medicine.id},
+		(select name from medicine where medicine.id=#{medicine.id}),
+		(select fee from medicine where medicine.id=#{medicine.id}),
+		#{count},#{isdistributed});
+	</insert>
 </mapper>

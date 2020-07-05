@@ -35,4 +35,12 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
 
 
+	@Override
+	public int add(Prescription parameter) {
+		// TODO Auto-generated method stub
+		return mapper.add(parameter);
+	}
+
+
+
 }

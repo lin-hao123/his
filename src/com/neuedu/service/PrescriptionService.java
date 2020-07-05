@@ -13,6 +13,8 @@ public interface PrescriptionService {
 	int queryAllCount();
 	
 	List<Prescription> queryAllByPage(Map<String, Object> parameter);
+
+	int add(Prescription parameter);
 	
 
 
