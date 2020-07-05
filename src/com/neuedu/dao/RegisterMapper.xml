@@ -32,6 +32,6 @@
 	  </select>
 	<insert id="add" parameterType="Register"> 
 		insert into register (number,date,docid,docname,docfee,ispaid) 
-		values (#{number},CURDATE(),#{doctor.id},(select name from doctor where doctor.id=#{doctor.id}),(select fee from doctor where doctor.id=#{doctor.id}),#{ispaid});
+		values (#{number},CURDATE(),#{doctor.id},#{doctor.name},#{doctor.fee},#{ispaid}); 
 	</insert>
 </mapper>
