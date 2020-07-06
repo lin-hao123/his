@@ -55,4 +55,21 @@
 		update register set ispaid=1
 		where id=${id}
 	</update>
+	
+		
+	<select id="queryDocCount" resultType="_int">
+	select count(*) FROM register r, doctor d
+	WHERE d.id=r.docid and d.id=#{docid}
+	</select>
+	
+	<select id= "queryByDocid" parameterType= "map" resultMap= "registerMap">
+	SELECT o.id AS oid, o.number AS onumber,
+	o.date AS date, e.id AS eid,
+	e.name AS ename,e.fee AS efee, o.ispaid AS ispaid
+	FROM doctor e,register o WHERE e.id = o.docid
+	AND e.id=#{docid}
+	<if test="startIndex != null and pageSize != nuLL">
+	limit #{startIndex}, #{pageSize}
+	</if>
+	</select>
 </mapper>

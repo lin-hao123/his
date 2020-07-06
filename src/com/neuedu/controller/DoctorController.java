@@ -58,7 +58,7 @@ public class DoctorController {
 				}
 				else 
 				{
-				return "redirect:/register/list3";
+				return "redirect:/register/list3/"+String.valueOf(doctor.getId());
 				}
 			}
 		}else {

@@ -22,4 +22,8 @@ public interface RegisterService
 	int update(Register parameter);
 
 	int queryCount();
+
+	int queryDocCount(@Param("docid")int parameter);
+	
+	List<Register> queryByDocid(Map<String,Object> parameter);
 }

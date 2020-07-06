@@ -3,9 +3,10 @@ package com.neuedu.dao;
 import java.util.List;
 import java.util.Map;
 
-
+import org.apache.ibatis.annotations.Param;
 
 import com.neuedu.entity.Prescription;
+import com.neuedu.entity.Register;
 
 
 public interface PrescriptionMapper {
@@ -16,5 +17,7 @@ public interface PrescriptionMapper {
 	int queryAllCount();
 	
 	int add(Prescription parameter);	
+	
+
 
 }

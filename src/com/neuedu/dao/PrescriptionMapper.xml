@@ -38,4 +38,5 @@
 		(select fee from medicine where medicine.id=#{medicine.id}),
 		#{count},#{isdistributed});
 	</insert>
+
 </mapper>

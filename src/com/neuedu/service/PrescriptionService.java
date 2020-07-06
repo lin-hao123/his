@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.neuedu.entity.Prescription;
+import com.neuedu.entity.Register;
 
 public interface PrescriptionService {
 	
@@ -15,5 +16,9 @@ public interface PrescriptionService {
 	List<Prescription> queryAllByPage(Map<String, Object> parameter);
 
 	int add(Prescription parameter);
+	
+	int queryDocCount(@Param("docid")int parameter);
+	
+	List<Register> queryByDocid(Map<String,Object> parameter);
 	
 }

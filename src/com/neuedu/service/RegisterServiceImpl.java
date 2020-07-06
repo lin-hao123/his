@@ -59,4 +59,16 @@ public class RegisterServiceImpl implements RegisterService {
 		return mapper.queryCount();
 	}
 
+	@Override
+	public int queryDocCount(int parameter) {
+		// TODO Auto-generated method stub
+		return mapper.queryDocCount(parameter);
+	}
+
+	@Override
+	public List<Register> queryByDocid(Map<String, Object> parameter) {
+		// TODO Auto-generated method stub
+		return mapper.queryByDocid(parameter);
+	}
+
 }

@@ -79,8 +79,8 @@ public class RegisterController {
 		
 		return "register2";
 	}
-	@RequestMapping("/list3")
-	public String list3(String strPageIndex, String strPageSize, Model model){
+	@RequestMapping("/list3/{id}")
+	public String list3(@PathVariable int id,String strPageIndex, String strPageSize, Model model){
 		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
 		
 		int pageSize = PageTool.getPageSize(strPageSize, model);
@@ -92,8 +92,10 @@ public class RegisterController {
 		Map<String, Object> mapParameter = new HashMap<String, Object>(); 
 						
 		PageTool.setStartIndex(pageSize, pageIndex, mapParameter);
+		
+		mapParameter.put("docid", id);
 
-		List<Register> list = registerService.queryAllByPage(mapParameter); 
+		List<Register> list = registerService.queryByDocid(mapParameter); 
 		
 		model.addAttribute("list",list);
 		

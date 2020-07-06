@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.neuedu.dao.PrescriptionMapper;
 import com.neuedu.entity.Prescription;
+import com.neuedu.entity.Register;
 
 @Service("prescriptionServiceImpl")
 public class PrescriptionServiceImpl implements PrescriptionService {
@@ -39,6 +40,22 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 	public int add(Prescription parameter) {
 		// TODO Auto-generated method stub
 		return mapper.add(parameter);
+	}
+
+
+
+	@Override
+	public int queryDocCount(int parameter) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public List<Register> queryByDocid(Map<String, Object> parameter) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

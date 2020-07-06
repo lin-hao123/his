@@ -21,5 +21,9 @@ public interface RegisterMapper {
 
 	List<Register> queryByPage(Map<String, Object> parameter);
 
-	int queryCount();	
+	int queryCount();
+
+	List<Register> queryByDocid(Map<String, Object> parameter);
+
+	int queryDocCount(int parameter);	
 }
