@@ -18,6 +18,7 @@
 		SELECT o.id AS oid,  o.number AS oname,  e.id AS eid,  e.name AS ename, e.fee AS efee, date,ispaid
 		FROM register o, doctor e WHERE e.id = o.docid 
 	 </select>
+	 
 	 <select id="queryAllCount" resultType="_int"> 
 		select count(*) from register 
 	 </select>
@@ -30,6 +31,21 @@
 			limit #{startIndex}, #{pageSize} 
 		</if>
 	  </select>
+	  
+	  <select id="queryByPage" parameterType="map" resultMap="registerMap">
+		SELECT o.id AS oid, o.number AS onumber, e.id AS eid, e.name AS ename, e.fee AS efee, date,ispaid 
+		FROM register o,doctor e  
+		WHERE e.id = o.docid and e.id=#{doctor.id}
+		<if test="startIndex != null and pageSize != null"> 
+			limit #{startIndex}, #{pageSize} 
+		</if>
+	  </select>
+	  
+	  <select id="queryCount" resultType="_int"> 
+		select count(*) from register
+		where docid=#{doctor.id}
+	  </select>
+	 
 	<insert id="add" parameterType="Register"> 
 		insert into register (number,date,docid,docname,docfee,ispaid) 
 		values (#{number},CURDATE(),#{doctor.id},(select name from doctor where doctor.id=#{doctor.id}),(select fee from doctor where doctor.id=#{doctor.id}),#{ispaid});

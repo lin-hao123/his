@@ -47,4 +47,16 @@ public class RegisterServiceImpl implements RegisterService {
 		return  mapper.update(parameter);
 	}
 
+	@Override
+	public List<Register> queryByPage(Map<String, Object> parameter) {
+		// TODO Auto-generated method stub
+		return mapper.queryByPage(parameter);
+	}
+
+	@Override
+	public int queryCount() {
+		// TODO Auto-generated method stub
+		return mapper.queryCount();
+	}
+
 }

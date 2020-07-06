@@ -32,7 +32,7 @@
 	
 	<insert id="add" parameterType="Prescription"> 
 		insert into prescription (rid,mid,mname,mfee,count,isdistributed) 
-		values (#{register.id},
+		values (${id},
 		#{medicine.id},
 		(select name from medicine where medicine.id=#{medicine.id}),
 		(select fee from medicine where medicine.id=#{medicine.id}),
