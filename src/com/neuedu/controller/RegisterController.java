@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -56,7 +57,7 @@ public class RegisterController {
 	}//list1 完全无Bug完成
 	@RequestMapping("/list2")
 	public String list2(String strPageIndex, String strPageSize, Model model){
-int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
+		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
 		
 		int pageSize = PageTool.getPageSize(strPageSize, model);
 		
@@ -130,6 +131,15 @@ int pageIndex = PageTool.getPageIndex(strPageIndex, model);
 	public String add(Register parameter){
 		registerService.add(parameter);
 		return "redirect:/register/list";
+	}
+	
+	
+	@RequestMapping("/update/{id}")
+	public String update(@PathVariable int id,Register parameter)
+	{
+		parameter.setId(id);
+		registerService.update(parameter);
+		return "redirect:/register/list2";
 	}
 
 }

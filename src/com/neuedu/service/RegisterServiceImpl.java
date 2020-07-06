@@ -41,4 +41,10 @@ public class RegisterServiceImpl implements RegisterService {
 		return  mapper.add(parameter);
 	}
 
+	@Override
+	public int update(Register parameter) {
+		// TODO Auto-generated method stub
+		return  mapper.update(parameter);
+	}
+
 }

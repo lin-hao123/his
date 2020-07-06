@@ -16,6 +16,4 @@ public interface PrescriptionService {
 
 	int add(Prescription parameter);
 	
-
-
 }

@@ -15,5 +15,7 @@ public interface RegisterMapper {
 	
 	List<Register> queryAllByPage(Map<String, Object> parameter);
 	
-	int add(Register parameter);	
+	int add(Register parameter);
+
+	int update(Register parameter);	
 }

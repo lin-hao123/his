@@ -37,9 +37,10 @@ public class PrescriptionController
 	@Qualifier("registerServiceImpl")
 	private RegisterService registerService;
 	
-	@RequestMapping("/list/{prescription.id}")
+	@RequestMapping("/list/{register.id}")
 	public String list(String strPageIndex, String strPageSize, Model model){
 		
+
 		int pageIndex = PageTool.getPageIndex(strPageIndex, model);  
 		
 		int pageSize = PageTool.getPageSize(strPageSize, model);

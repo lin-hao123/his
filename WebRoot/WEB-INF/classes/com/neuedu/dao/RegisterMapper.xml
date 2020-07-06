@@ -34,4 +34,9 @@
 		insert into register (number,date,docid,docname,docfee,ispaid) 
 		values (#{number},CURDATE(),#{doctor.id},(select name from doctor where doctor.id=#{doctor.id}),(select fee from doctor where doctor.id=#{doctor.id}),#{ispaid});
 	</insert>
+	
+	<update id="update" parameterType="Register"> 
+		update register set ispaid=1
+		where id=${id}
+	</update>
 </mapper>
