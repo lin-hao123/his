@@ -51,7 +51,6 @@ public class PrescriptionController
 		
 		Map<String, Object> mapParameter = new HashMap<String, Object>(); 
 		
-		
 		model.addAttribute("regiid",id);
 		
 		List<Medicine> listMedi = medicineService.queryAllByPage(mapParameter);  
@@ -72,7 +71,7 @@ public class PrescriptionController
 	{
 		parameter.getRegister().setId(id);
 		prescriptionService.add(parameter);
-		return "prescription";
+		return "redirect:/prescription/list/{id}";
 	}
 
 }

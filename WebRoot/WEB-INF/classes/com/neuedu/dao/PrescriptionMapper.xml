@@ -24,7 +24,7 @@
 	<select id="queryAllByPage" parameterType="map" resultMap="prescriptionMap"> 
 		SELECT p.id AS pid, r.id AS rid, m.id AS mid, m.name AS mname, m.fee AS mfee,p.count AS pcount,isdistributed AS pisdistributed
 		FROM prescription p,register r,medicine m  
-		WHERE p.mid=m.id 
+		WHERE p.mid=m.id
 		<if test="startIndex != null and pageSize != null"> 
 			limit #{startIndex}, #{pageSize} 
 		</if>
