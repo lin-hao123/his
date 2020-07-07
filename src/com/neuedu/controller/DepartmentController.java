@@ -56,6 +56,7 @@ public class DepartmentController {
 		departmentService.add(parameter);
 		return "redirect:/department/list";
 	}
+	
 	@ResponseBody
 	@RequestMapping("/st")  
 	public void st(){

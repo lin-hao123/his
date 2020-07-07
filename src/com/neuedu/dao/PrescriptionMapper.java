@@ -16,7 +16,11 @@ public interface PrescriptionMapper {
 
 	int queryAllCount(int parameter);
 	
-	int add(Prescription parameter);	
+	int add(Prescription parameter);
+
+	int update(Prescription parameter);
+
+	int medCount(Prescription parameter);	
 	
 
 

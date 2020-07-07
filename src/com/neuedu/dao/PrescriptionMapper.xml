@@ -21,6 +21,12 @@
 		select count(*) from prescription p,register r
 		WHERE p.rid=r.id and p.rid=#{rid}
 	 </select>
+	 
+	 <select id="medCount" resultType="_int"> 
+		select m.count
+		from medicine m,prescription p
+		where m.id=p.mid and p.id=${id}
+	 </select>
 	
 	<select id="queryAllByPage" parameterType="map" resultMap="prescriptionMap"> 
 		SELECT p.id AS pid, r.id AS rid, m.id AS mid, m.name AS mname, m.fee AS mfee,p.count AS pcount,isdistributed AS pisdistributed
@@ -40,4 +46,8 @@
 		#{count},#{isdistributed});
 	</insert>
 
+	<update id="update" parameterType="Prescription"> 
+		update prescription p,medicine m set m.count=m.count-p.count,p.isdistributed=1
+		where p.id=${id} and p.mid=m.id
+	</update>
 </mapper>

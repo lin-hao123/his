@@ -77,7 +77,7 @@
 				  <td>
 				  <c:choose>
 					<c:when test="${v.isdistributed==0 }">
-					  <a href="JavaScript:doDistribute()">发药</a>
+					  <a href="JavaScript:doDistribute('${v.id}')">发药</a>
 					  <script type="text/javascript">
 					  	function showMsg(msg){
 							//$("#signinForm").append('<div class="alert alert-danger" role="alert"><strong>用户名不能为空</strong></div>');
@@ -88,23 +88,29 @@
 							
 						}
 						
-						function hideMsg(){
+						function hideMsg()
+						{
 							$("#strongMsg").text("");
 							$("#divMsg").hide();
 						}
 						
-					  	function doDistribute(){
+					  	function doDistribute(id)
+					  	{
 					  		$.post({
-			        			url:"${pageContext.request.contextPath}/prescription/update/${v.id }/${regiid}",
+			        			url:"${pageContext.request.contextPath}/prescription/update/"+id,
 			        			data:{},
-			        			success:function(data){
-			        				if(data=="0"){
+			        			success:function(data)
+			        			{
+			        				if(data=="0")
+			        				{
 			        					showMsg("发药失败，请检查药品库存数量。");
-			        				}else{
+			        				}
+			        				else
+			        				{
 			        					hideMsg();
 			        				}
 			        			}
-			        		})
+			        			})
 					  	}
 					    
 					  </script>

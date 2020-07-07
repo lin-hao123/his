@@ -60,4 +60,20 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
 
 
+	@Override
+	public int update(Prescription parameter) {
+		// TODO Auto-generated method stub
+		return mapper.update(parameter);
+	}
+
+
+
+	@Override
+	public int medCount(Prescription parameter) {
+		// TODO Auto-generated method stub
+		return mapper.medCount(parameter);
+	}
+
+
+
 }

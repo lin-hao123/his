@@ -20,5 +20,9 @@ public interface PrescriptionService {
 	int queryDocCount(@Param("docid")int parameter);
 	
 	List<Register> queryByDocid(Map<String,Object> parameter);
+
+	int update(Prescription parameter);
+
+	int medCount(Prescription parameter);
 	
 }
