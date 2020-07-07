@@ -14,7 +14,7 @@ public interface PrescriptionMapper {
 
 	List<Prescription> queryAllByPage(Map<String, Object> parameter);
 
-	int queryAllCount();
+	int queryAllCount(int parameter);
 	
 	int add(Prescription parameter);	
 	

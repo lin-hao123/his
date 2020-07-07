@@ -11,7 +11,7 @@ import com.neuedu.entity.Register;
 public interface PrescriptionService {
 	
 
-	int queryAllCount();
+	int queryAllCount(@Param("rid")int parameter);
 	
 	List<Prescription> queryAllByPage(Map<String, Object> parameter);
 

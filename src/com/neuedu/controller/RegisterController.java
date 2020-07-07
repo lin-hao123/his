@@ -85,7 +85,7 @@ public class RegisterController {
 		
 		int pageSize = PageTool.getPageSize(strPageSize, model);
 		
-		int dataCount = registerService.queryAllCount();  
+		int dataCount = registerService.queryDocCount(id);  
 		
 		PageTool.setPageCount(pageSize, dataCount, model);
 		

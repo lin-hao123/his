@@ -45,7 +45,7 @@ public class PrescriptionController
 		
 		int pageSize = PageTool.getPageSize(strPageSize, model);
 		
-		int dataCount = prescriptionService.queryAllCount();  
+		int dataCount = prescriptionService.queryAllCount(id);  
 		
 		PageTool.setPageCount(pageSize, dataCount, model);
 		
@@ -56,6 +56,8 @@ public class PrescriptionController
 		List<Medicine> listMedi = medicineService.queryAllByPage(mapParameter);  
 		
 		model.addAttribute("listMedi",listMedi);
+		
+		mapParameter.put("rid", id);
 		
 		PageTool.setStartIndex(pageSize, pageIndex, mapParameter);
 		

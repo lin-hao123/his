@@ -29,9 +29,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
 
 	@Override
-	public int queryAllCount() {
+	public int queryAllCount(int parameter) {
 		// TODO Auto-generated method stub
-		return mapper.queryAllCount();
+		return mapper.queryAllCount(parameter);
 	}
 
 

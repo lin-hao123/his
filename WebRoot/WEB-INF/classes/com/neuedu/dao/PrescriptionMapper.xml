@@ -18,13 +18,14 @@
 	</resultMap>
 	
 	 <select id="queryAllCount" resultType="_int"> 
-		select count(*) from prescription
+		select count(*) from prescription p,register r
+		WHERE p.rid=r.id and p.rid=#{rid}
 	 </select>
 	
 	<select id="queryAllByPage" parameterType="map" resultMap="prescriptionMap"> 
 		SELECT p.id AS pid, r.id AS rid, m.id AS mid, m.name AS mname, m.fee AS mfee,p.count AS pcount,isdistributed AS pisdistributed
 		FROM prescription p,register r,medicine m  
-		WHERE p.mid=m.id
+		WHERE p.mid=m.id and p.rid=#{rid}
 		<if test="startIndex != null and pageSize != null"> 
 			limit #{startIndex}, #{pageSize} 
 		</if>
